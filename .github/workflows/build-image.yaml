@@ -7,6 +7,10 @@ on:
         type: boolean
         required: true
         description: "Should push to docker repository"
+      version:
+        type: string
+        required: true
+        description: "Version to set image tag to"
 jobs:
   build-image:
     runs-on: ubuntu-latest
@@ -32,6 +36,8 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           push: ${{ inputs.push }}
+          tags: |
+            cloud.canister.io:5000/bullyrooks/message-generator:${{ inputs.version }}
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,mode=max,dest=/tmp/.buildx-cache
 
