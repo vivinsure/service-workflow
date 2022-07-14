@@ -23,7 +23,7 @@ jobs:
         with:
           path: /tmp/.buildx-cache
           # Key is named differently to avoid collision
-          key: {% raw %}${{ runner.os }}-multi-buildx-${{ github.sha }}{% endraw %}
+          key: ${{ runner.os }}-multi-buildx-${{ github.sha }}
           restore-keys: |
             ${{ runner.os }}-multi-buildx
 
