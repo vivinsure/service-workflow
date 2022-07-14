@@ -25,7 +25,7 @@ jobs:
           # Key is named differently to avoid collision
           key: {% raw %}${{ runner.os }}-multi-buildx-${{ github.sha }}{% endraw %}
           restore-keys: |
-            {% raw %}${{ runner.os }}-multi-buildx{% endraw %}
+            ${{ runner.os }}-multi-buildx
 
       - name: Build and push
         id: docker_build
