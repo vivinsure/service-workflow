@@ -5,7 +5,7 @@ on:
     inputs:
       version:
         type: string
-        required: true
+        required: false
         description: "Version to set image tag to"
 jobs:
   build-image:
