@@ -1,0 +1,24 @@
+name: Deploy the helm chart to Okteto
+
+on: workflow_call
+
+jobs:
+  deploy:
+    needs:
+      - get-version
+      - helm-chart
+    runs-on: ubuntu-latest
+    env:
+      version: ${{ needs.get-version.outputs.version }}
+    steps:
+      - name: Deploy
+        uses: WyriHaximus/github-action-helm3@v2
+        with:
+          exec: |
+            helm repo add bullyrooks https://bullyrooks.github.io/helm-charts/
+            helm repo update
+            echo "helm upgrade message-generator bullyrooks/message-generator --install --version ${{ env.version }}"
+            helm upgrade message-generator bullyrooks/message-generator --install --version ${{ env.version }}
+          kubeconfig: '${{ secrets.KUBECONFIG }}'
+
+

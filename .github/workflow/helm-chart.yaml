@@ -1,0 +1,30 @@
+name: Compile the Helm Chart and Publish
+
+on: workflow_call
+
+jobs:
+  helm-chart:
+    needs:
+      - build-image
+      - can-i-deploy
+      - get-version
+    runs-on: ubuntu-latest
+    env:
+      version: ${{ needs.get-version.outputs.version }}
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+      - name: Publish Helm chart
+        uses: stefanprodan/helm-gh-pages@master
+        with:
+          token: ${{ secrets.CHART_TOKEN }}
+          charts_dir: helm
+          charts_url: https://bullyrooks.github.io/helm-charts/
+          repository: helm-charts
+          branch: gh-charts
+          app_version: ${{ env.version }}
+          chart_version: ${{ env.version }}
+
+
+
