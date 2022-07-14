@@ -1,10 +1,11 @@
 name: Retrieve version and update via semantic-release
 
-on: workflow_call
-  outputs:
-    version:
-      description: "The new artifact version"
-      value: ${{ jobs.get-version.outputs.version }}
+on:
+  workflow_call:
+    outputs:
+      version:
+        description: "The new artifact version"
+        value: ${{ jobs.get-version.outputs.version }}
 jobs:
   get-version:
     runs-on: ubuntu-latest

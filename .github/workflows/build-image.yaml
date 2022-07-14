@@ -1,11 +1,12 @@
 name: Build Docker image with optional push
 
-on: workflow_call
-  input:
-    push:
-      type: string
-      required: true
-      description: "Should push to docker repository"
+on:
+  workflow_call:
+    input:
+      push:
+        type: string
+        required: true
+        description: "Should push to docker repository"
 jobs:
   build-image:
     runs-on: ubuntu-latest

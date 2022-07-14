@@ -1,15 +1,16 @@
 name: Deploy the helm chart to Okteto
 
-on: workflow_call
-  input:
-    version:
-      type: string
-      required: true
-      description: Version to bump to
-  secrets:
-    kube-config:
-      description: 'Kube config file to talk to the the k8s cluster'
-      required: true
+on:
+  workflow_call:
+    input:
+      version:
+        type: string
+        required: true
+        description: Version to bump to
+    secrets:
+      kube-config:
+        description: 'Kube config file to talk to the the k8s cluster'
+        required: true
 jobs:
   deploy:
     runs-on: ubuntu-latest

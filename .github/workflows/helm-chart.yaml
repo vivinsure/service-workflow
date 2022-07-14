@@ -1,15 +1,16 @@
 name: Compile the Helm Chart and Publish
 
-on: workflow_call
-  input:
-    version:
-      type: string
-      required: true
-      description: "Version to bump to"
-  secrets:
-    access-token:
-      description: 'A token passed from the caller workflow'
-      required: true
+on:
+  workflow_call:
+    input:
+      version:
+        type: string
+        required: true
+        description: "Version to bump to"
+    secrets:
+      access-token:
+        description: 'A token passed from the caller workflow'
+        required: true
 jobs:
   helm-chart:
     runs-on: ubuntu-latest
