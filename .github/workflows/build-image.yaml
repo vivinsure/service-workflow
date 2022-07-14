@@ -3,10 +3,6 @@ name: Build Docker image with optional push
 on:
   workflow_call:
     inputs:
-      push:
-        type: boolean
-        required: true
-        description: "Should push to docker repository"
       version:
         type: string
         required: true
@@ -31,7 +27,8 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-multi-buildx
 
-      - name: Build and push
+      - name: Build and push with version
+        if: "${{ inputs.version != '' }}"
         id: docker_build
         uses: docker/build-push-action@v3
         with:
@@ -41,4 +38,11 @@ jobs:
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,mode=max,dest=/tmp/.buildx-cache
 
-
+      - name: Build and push without version
+        if: "${{ inputs.version == '' }}"
+        id: docker_build
+        uses: docker/build-push-action@v3
+        with:
+          push: false
+          cache-from: type=local,src=/tmp/.buildx-cache
+          cache-to: type=local,mode=max,dest=/tmp/.buildx-cache
