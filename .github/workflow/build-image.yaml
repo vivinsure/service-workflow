@@ -1,9 +1,9 @@
-name: Compile and test with Maven
+name: Build Docker image with optional push
 
 on: workflow_call
   input:
     push:
-      type: boolean
+      type: string
       required: true
       description: "Should push to docker repository"
 jobs:
