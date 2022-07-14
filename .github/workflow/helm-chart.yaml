@@ -1,16 +1,18 @@
 name: Compile the Helm Chart and Publish
 
 on: workflow_call
-
+  input:
+    version:
+      type: string
+      required: true
+      description: "Version to bump to"
+  secrets:
+    access-token:
+      description: 'A token passed from the caller workflow'
+      required: true
 jobs:
   helm-chart:
-    needs:
-      - build-image
-      - can-i-deploy
-      - get-version
     runs-on: ubuntu-latest
-    env:
-      version: ${{ needs.get-version.outputs.version }}
     steps:
       - uses: actions/checkout@v3
         with:
@@ -18,13 +20,13 @@ jobs:
       - name: Publish Helm chart
         uses: stefanprodan/helm-gh-pages@master
         with:
-          token: ${{ secrets.CHART_TOKEN }}
+          token: ${{ secrets.access-token }}
           charts_dir: helm
           charts_url: https://bullyrooks.github.io/helm-charts/
           repository: helm-charts
           branch: gh-charts
-          app_version: ${{ env.version }}
-          chart_version: ${{ env.version }}
+          app_version: ${{ inputs.version }}
+          chart_version: ${{ inputs.version }}
 
 
 
