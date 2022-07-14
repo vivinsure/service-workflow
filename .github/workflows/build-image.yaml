@@ -29,10 +29,9 @@ jobs:
 
       - name: Build and push with version
         if: "${{ inputs.version != '' }}"
-        id: docker_build
         uses: docker/build-push-action@v3
         with:
-          push: ${{ inputs.push }}
+          push: true
           tags: |
             cloud.canister.io:5000/bullyrooks/message-generator:${{ inputs.version }}
           cache-from: type=local,src=/tmp/.buildx-cache
@@ -40,7 +39,6 @@ jobs:
 
       - name: Build and push without version
         if: "${{ inputs.version == '' }}"
-        id: docker_build
         uses: docker/build-push-action@v3
         with:
           push: false
