@@ -2,7 +2,7 @@ name: Deploy the helm chart to Okteto
 
 on:
   workflow_call:
-    input:
+    inputs:
       version:
         type: string
         required: true

@@ -2,7 +2,7 @@ name: Compile the Helm Chart and Publish
 
 on:
   workflow_call:
-    input:
+    inputs:
       version:
         type: string
         required: true

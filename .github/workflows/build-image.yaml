@@ -2,9 +2,9 @@ name: Build Docker image with optional push
 
 on:
   workflow_call:
-    input:
+    inputs:
       push:
-        type: string
+        type: boolean
         required: true
         description: "Should push to docker repository"
 jobs:
