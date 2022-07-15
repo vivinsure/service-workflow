@@ -13,6 +13,8 @@ on:
 jobs:
   get-version:
     runs-on: ubuntu-latest
+    env:
+      GH_TOKEN:  ${{ secrets.GH_TOKEN }}
     outputs:
       version: ${{ steps.store-version.outputs.versionout }}
     steps:
