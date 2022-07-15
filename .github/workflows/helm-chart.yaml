@@ -7,6 +7,7 @@ on:
         type: string
         required: true
         description: "Version to bump to"
+    secrets:
       access-token:
         description: 'A token passed from the caller workflow'
         required: true
@@ -20,7 +21,7 @@ jobs:
       - name: Publish Helm chart
         uses: stefanprodan/helm-gh-pages@master
         with:
-          token: ${{ inputs.access-token }}
+          token: ${{ secrets.access-token }}
           charts_dir: helm
           charts_url: https://bullyrooks.github.io/helm-charts/
           repository: helm-charts
