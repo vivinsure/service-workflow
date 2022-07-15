@@ -1,4 +1,4 @@
-name: Build Docker image with optional push
+name: Build Docker image
 
 on:
   workflow_call:

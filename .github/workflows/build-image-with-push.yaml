@@ -1,4 +1,4 @@
-name: Build Docker image with optional push
+name: Build Docker image with push
 
 on:
   workflow_call:
@@ -19,7 +19,7 @@ on:
         required: true
         description: "Docker registery password"
 jobs:
-  build-image:
+  build-image-with-push:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
