@@ -6,6 +6,10 @@ on:
       version:
         description: "The new artifact version"
         value: ${{ jobs.get-version.outputs.version }}
+    secrets:
+      GH_TOKEN:
+        description: 'A token passed from the caller workflow'
+        required: true
 jobs:
   get-version:
     runs-on: ubuntu-latest
