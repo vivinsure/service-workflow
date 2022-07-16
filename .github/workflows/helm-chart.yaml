@@ -25,7 +25,7 @@ jobs:
           charts_dir: helm
           charts_url: https://bullyrooks.github.io/helm-charts/
           owner: bullyrooks
-          repository: helm-charts
+          repository: bullyrooks/helm-charts
           branch: gh-charts
           app_version: ${{ inputs.version }}
           chart_version: ${{ inputs.version }}
