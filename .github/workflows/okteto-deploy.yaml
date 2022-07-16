@@ -7,6 +7,14 @@ on:
         type: string
         required: true
         description: Version to bump to
+      service-name:
+        type: string
+        required: true
+        description: Helm name
+      helm-chart:
+        type: string
+        required: true
+        description: Helm chart to deploy
     secrets:
       kube-config:
         description: 'Kube config file to talk to the the k8s cluster'
@@ -21,8 +29,8 @@ jobs:
           exec: |
             helm repo add bullyrooks https://bullyrooks.github.io/helm-charts/
             helm repo update
-            echo "helm upgrade message-generator bullyrooks/message-generator --install --version ${{ inputs.version }}"
-            helm upgrade message-generator bullyrooks/message-generator --install --version ${{ inputs.version }}
+            echo "helm upgrade ${{ inputs.service-name }} ${{ inputs.helm-chart }} --install --version ${{ inputs.version }}"
+            helm upgrade ${{ inputs.service-name }} ${{ inputs.helm-chart }} --install --version ${{ inputs.version }}
           kubeconfig: '${{ secrets.kube-config }}'
 
 
