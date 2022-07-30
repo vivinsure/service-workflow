@@ -14,10 +14,10 @@ on:
     secrets:
       canister-username:
         required: true
-        description: "Docker registery username"
+        description: "Docker registry username"
       canister-password:
         required: true
-        description: "Docker registery password"
+        description: "Docker registry password"
 jobs:
   build-image-with-push:
     runs-on: ubuntu-latest
