@@ -15,6 +15,10 @@ on:
         type: string
         required: true
         description: Helm chart to deploy
+      chart-location:
+        type: string
+        required: true
+        description: "Location of the helm chart museum"
     secrets:
       kube-config:
         description: 'Kube config file to talk to the the k8s cluster'
@@ -27,7 +31,7 @@ jobs:
         uses: WyriHaximus/github-action-helm3@v2
         with:
           exec: |
-            helm repo add bullyrooks https://bullyrooks.github.io/helm-charts/
+            helm repo add vivinsure ${{ inputs.chart-location }}
             helm repo update
             echo "helm upgrade ${{ inputs.service-name }} ${{ inputs.helm-chart }} --install --version ${{ inputs.version }}"
             helm upgrade ${{ inputs.service-name }} ${{ inputs.helm-chart }} --install --version ${{ inputs.version }}

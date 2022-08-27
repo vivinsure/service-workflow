@@ -7,6 +7,14 @@ on:
         type: string
         required: true
         description: "Version to bump to"
+      chart-location:
+        type: string
+        required: true
+        description: "Location of the helm chart museum"
+      gh-org:
+        type: string
+        required: true
+        description: "github organization"
     secrets:
       access-token:
         description: 'A token passed from the caller workflow'
@@ -23,8 +31,8 @@ jobs:
         with:
           token: ${{ secrets.access-token }}
           charts_dir: helm
-          charts_url: https://bullyrooks.github.io/helm-charts/
-          owner: bullyrooks
+          charts_url: ${{ inputs.chart-location }}
+          owner: ${{ inputs.gh-org }}
           repository: helm-charts
           branch: gh-charts
           app_version: ${{ inputs.version }}
