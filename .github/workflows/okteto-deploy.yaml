@@ -19,6 +19,10 @@ on:
         type: string
         required: true
         description: "Location of the helm chart museum"
+      namespace:
+        type: string
+        required: true
+        description: "K8s Namespace"
     secrets:
       kube-config:
         description: 'Kube config file to talk to the the k8s cluster'
@@ -33,8 +37,8 @@ jobs:
           exec: |
             helm repo add vivinsure ${{ inputs.chart-location }}
             helm repo update
-            echo "helm upgrade ${{ inputs.service-name }} ${{ inputs.helm-chart }} --install --version ${{ inputs.version }}"
-            helm upgrade ${{ inputs.service-name }} ${{ inputs.helm-chart }} --install --version ${{ inputs.version }}
+            echo "helm upgrade ${{ inputs.service-name }} ${{ inputs.helm-chart }} --install --namespace ${{ inputs.namespace }} --version ${{ inputs.version }}"
+            helm upgrade ${{ inputs.service-name }} ${{ inputs.helm-chart }} --install --namespace ${{ inputs.namespace }} --version ${{ inputs.version }}
           kubeconfig: '${{ secrets.kube-config }}'
 
 
