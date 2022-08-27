@@ -34,7 +34,7 @@ jobs:
           charts_url: ${{ inputs.chart-location }}
           owner: ${{ inputs.gh-org }}
           repository: helm-charts
-          branch: gh-charts
+          branch: gh-pages
           app_version: ${{ inputs.version }}
           chart_version: ${{ inputs.version }}
 
